@@ -1,9 +1,15 @@
 
 class Stack {
-
+  #mapInstance
+  
   constructor() {
-    this.mapInstance = new WeakMap()
-    this.clear()
+    this.#mapInstance = new WeakMap()
+    this.init()
+  }
+
+  init() {
+    this.#mapInstance.set(this, [])
+    this.items = this.#mapInstance.get(this)
   }
 
   push(item) {  
@@ -24,8 +30,7 @@ class Stack {
   }
 
   clear () {
-    this.mapInstance.set(this, [])
-    this.items = this.mapInstance.get(this)
+    this.init()
   }
 
   size () {  
@@ -34,6 +39,5 @@ class Stack {
 }
 
 const stack = new Stack()
-const stack2 = new Stack()
 stack.push('hello')
-stack2.push('world')
+console.log(stack.peek())
